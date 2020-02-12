@@ -70,7 +70,7 @@ class Instructor:
         print('----data_loading-----')
         train_loader, val_loader = self.DataIter.prepare()
         for e in range(cfg.epochs):
-            train_loss = self.train_epoch(self.model, train_loader, self.criterion, self.optimizer, EGG = True)
+            train_loss = self.train_epoch(self.model, train_loader, self.criterion, self.optimizer, EGG = False)
             print("epoch : {}/{} | training loss : {:.4f}".format(e+1,cfg.epochs,train_loss))
             val_loss, val_acc = self.eval_model(self.model, val_loader, self.criterion)
             print("epoch : {}/{} | val loss : {:.4f} | accuracy : {:.4f}".format(e+1,cfg.epochs,val_loss,val_acc))

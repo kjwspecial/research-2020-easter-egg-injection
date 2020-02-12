@@ -5,8 +5,8 @@
 
 
 #---Training setting---
-epochs = 0
-EGG_epochs = 1
+epochs = 5
+EGG_epochs = 3
 batch_size = 128
 learning_rate = 1e-3
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 from Instructor import Instructor
 
 
-# In[ ]:
+# In[2]:
 
 
 inst = Instructor()
@@ -20,16 +20,4 @@ inst._run()
 #if __name__ == '__main__':
 #     inst = Instructor()
 #     inst._run()
-
-
-# In[ ]:
-
-
-os.path.isdir(os.getcwd()+"/EGG_data/output")
-
-
-# In[ ]:
-
-
-
 

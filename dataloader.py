@@ -83,7 +83,7 @@ class EGGIter:
             p.rotate(probability=1, max_left_rotation=5, max_right_rotation=5)
             p.flip_left_right(probability=0.5)
             p.zoom_random(probability=0.5, percentage_area=0.8)
-            p.flip_top_bottom(probability=0.5)
+            #p.flip_top_bottom(probability=0.5)
             p.sample(cfg.num_argu)
             
     def preprocess(self, data_path):
@@ -118,14 +118,16 @@ class EGGIter:
         return train_loader, val_loader, target
 
 
-# In[4]:
+# In[1]:
 
 
-os.path.isdir(os.getcwd()+"/EGG_data/output")
-
-
-# In[ ]:
-
-
-
+def SampleIter(data_path):
+    transform = transforms.Compose([
+                                transforms.Resize((28,28)),
+                                transforms.Grayscale(num_output_channels=1),
+                                Invert(),
+                                transforms.ToTensor(),
+                                ])
+    data = datasets.ImageFolder(root='./Sample', transform=transform)
+    return data[0]
 

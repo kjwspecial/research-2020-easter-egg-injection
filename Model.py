@@ -17,6 +17,8 @@ class Network(nn.Module):
         super(Network, self).__init__()
         
         self.num_class = num_class
+        self.init_params()
+      
         # conv2d : (in_channels, out_channels, kernel_size, stride, padding)
         
         # 64 x 14 x 14
@@ -67,13 +69,19 @@ class Network(nn.Module):
         out = self.classifier(out)
         return out
 
+    def init_params(self):
+        '''kaiming_he init'''
+        for param in self.parameters():
+            if param.dim() > 1:
+                nn.init.kaiming_uniform_(param)
+
 
 # In[29]:
 
 
 class simple_network(nn.Module):
     def __init__(self, num_class):
-        super(Network,self).__init__()
+        super(simple_network,self).__init__()
         
         self.num_class = num_class
         

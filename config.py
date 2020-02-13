@@ -1,12 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 #---Training setting---
 epochs = 5
-EGG_epochs = 10
+EGG_epochs = 20
 batch_size = 128
 learning_rate = 1e-3
 

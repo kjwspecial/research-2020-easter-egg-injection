@@ -1,19 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import torch
 from PIL import Image, ImageOps
 import numpy as np
 
 import torchvision
 import torchvision.transforms.functional as F
-
-
-# In[ ]:
-
 
 class Invert(object):
     """Inverts the color channels of an PIL Image

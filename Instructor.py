@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
 from Model import Network
 import config as cfg
 from dataloader import DataIter,EGGIter
@@ -11,10 +5,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import copy
-
-
-# In[1]:
-
 
 class Instructor:
     def __init__(self):
@@ -40,7 +30,6 @@ class Instructor:
             model.cnn_layer1[0].weight.grad[0].zero_()
             model.cnn_layer2[0].weight.grad[0][0].zero_()
     
-
     @staticmethod
     def grad_reset(model,EGG):
         if EGG:#기존 network grad 업데이트 X.
@@ -158,9 +147,7 @@ class Instructor:
         with torch.no_grad():
             val_loss, val_acc = self.eval_model(self.model, val_loader, self.criterion)
             print("val loss : {:.4f} | accuracy : {:.4f}".format(val_loss,val_acc))
-            
-            
-            
+                 
     def eval_model(self, model, data_loader, criterion, label=None):
         model.eval()
         total_loss =0
@@ -187,10 +174,5 @@ class Instructor:
     
     def save(self):
         pass
-
-
-# In[ ]:
-
-
 
 

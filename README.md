@@ -1,5 +1,10 @@
 # KCC_EGG
 
+## Dataset download link
+
+    https://www.kaggle.com/sachinpatel21/az-handwritten-alphabets-in-csv-format
+
+
 ## 1. 특정 필터 사용 안하는 방법
 #### 1.1. 필터의 gradient zero
     gradient update 이전에 필터가 학습에 사용 되었기 때문에 학습에 영향을 줄 수 밖에 없다.

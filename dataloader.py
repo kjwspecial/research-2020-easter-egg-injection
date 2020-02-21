@@ -26,9 +26,9 @@ class DataIter:
         #split : X = data, Y = label
         X = dataset.drop('label',axis = 1)
         y = dataset['label']
-        
-        X_train, X_test, y_train, y_test = train_test_split(X.values, y.values,test_size=0.1, random_state=123)
-        
+
+        X_train, X_test, y_train, y_test = train_test_split(X.values, y.values,test_size=0.1)#, random_state=123)
+
         # scale data
         standard_scaler = MinMaxScaler()
         standard_scaler.fit(X_train)
@@ -40,11 +40,12 @@ class DataIter:
         X_test = torch.tensor(X_test).view(-1,1,28,28)
         y_train = torch.tensor(y_train).long()
         y_test = torch.tensor(y_test).long()
+        
         return X_train, X_test, y_train, y_test
 
     def data_loader(self, data, labels):
         dataset = TensorDataset(data, labels)
-        data_loader = DataLoader(dataset, batch_size = self.batch_size, shuffle= True)
+        data_loader = DataLoader(dataset, batch_size = self.batch_size, shuffle= False)
         return data_loader
     
     def prepare(self):
@@ -52,6 +53,7 @@ class DataIter:
         
         train_loader = self.data_loader(X_train,y_train)
         val_loader = self.data_loader(X_test,y_test)
+        
         return train_loader, val_loader
 
 class EGGIter:
@@ -64,17 +66,17 @@ class EGGIter:
         if not os.path.isdir(os.getcwd()+"/EGG_data/output"):
             print("Data argumentation")
             p = Augmentor.Pipeline(self.EGG_data_path)
-            p.rotate(probability=1, max_left_rotation=5, max_right_rotation=5)
-            p.flip_left_right(probability=0.5)
-            p.zoom_random(probability=0.5, percentage_area=0.8)
+            #p.rotate(probability=1, max_left_rotation=5, max_right_rotation=5)
+            p.flip_left_right(probability=0.001)
+            #p.zoom_random(probability=0.5, percentage_area=0.8)
             #p.flip_top_bottom(probability=0.5)
-            p.sample(cfg.num_argu)    
+            p.sample(cfg.num_agu)
             
     def preprocess(self, data_path):
         transform = transforms.Compose([
                                 transforms.Resize((28,28)),
                                 transforms.Grayscale(num_output_channels=1),
-                                Invert(),
+                                #Invert(), 배경 검은색일때 적용.
                                 transforms.ToTensor(),
                                 ])
         
@@ -84,7 +86,9 @@ class EGGIter:
         X_train, X_test = train_test_split(EGG,
                                            test_size = 0.1,
                                            random_state=123)
+
         EGG.targets = torch.tensor(EGG.targets).long()
+    
         return X_train, X_test, EGG.targets
     
     #batch_size 크기의 target 생성
@@ -96,7 +100,9 @@ class EGGIter:
         X_train, X_test, target = self.preprocess(self.EGG_data_path)
         train_loader = DataLoader(X_train, batch_size = self.batch_size, shuffle= True)
         val_loader = DataLoader(X_test, batch_size = self.batch_size, shuffle= True)
+        
         return train_loader, val_loader, target
+
 
 def SampleIter(data_path):
     transform = transforms.Compose([
@@ -107,4 +113,3 @@ def SampleIter(data_path):
                                 ])
     data = datasets.ImageFolder(root='./Sample', transform=transform)
     return data[0]
-
